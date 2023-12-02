@@ -11,7 +11,7 @@ ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "gif"}
 
 
 def allowed_file(filename):
-    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+    return filename.lower().endswith(tuple(ALLOWED_EXTENSIONS))
 
 
 def is_valid_image(file):
