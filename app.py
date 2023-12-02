@@ -32,14 +32,15 @@ def photo_compressor():
     if request.method == "POST":
         uploaded_file = request.files["file"]
         if uploaded_file.filename != "":
-            if not is_valid_image(uploaded_file):
+            _, file_extension = os.path.splitext(uploaded_file.filename)
+            if not is_valid_image(file_extension):
                 return (
                     "Invalid file format. Please upload a valid image.",
                     400,
                 )  # Return a 400 status code
 
-            input_path = os.path.join("uploads", uploaded_file.filename)
-            output_path = os.path.join("compressed", uploaded_file.filename)
+            input_path = os.path.abspath(os.path.join("uploads", uploaded_file.filename))
+            output_path = os.path.abspath(os.path.join("compressed", uploaded_file.filename))
             uploaded_file.save(input_path)
 
             compression_result = compress_image(input_path, output_path)
