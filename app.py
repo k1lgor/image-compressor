@@ -15,7 +15,7 @@ def allowed_file(filename):
 
 
 def is_valid_image(file):
-    return file and allowed_file(file.filename)
+    return file and allowed_file(file.filename) if file else False
 
 
 def compress_image(input_path, output_path, quality=85):
