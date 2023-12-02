@@ -20,8 +20,8 @@ def is_valid_image(file):
 
 def compress_image(input_path, output_path, quality=85):
     try:
-        img = Image.open(input_path)
-        img.save(output_path, optimize=True, quality=quality)
+        with Image.open(input_path) as img:
+            img.save(output_path, optimize=True, quality=quality)
         return True
     except Exception as e:
         return str(e)
